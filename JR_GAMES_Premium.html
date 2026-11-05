@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090b18">
+<title>JR GAMES — Play Beyond Limits</title>
+<style>
+:root{--bg:#080a16;--panel:#11162a;--panel2:#171e36;--line:#293456;--cyan:#28e7ff;--purple:#9b5cff;--pink:#ff4fc8;--text:#f4f6ff;--muted:#9ba6c7;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#201044 0,transparent 34%),radial-gradient(ellipse at 90% 15%,#073348 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;font-weight:800;color:#06101c;background:linear-gradient(110deg,var(--cyan),#8d9dff);transition:.2s}button:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 8px 24px #28e7ff30}button.secondary{background:#222b49;color:var(--text);border:1px solid var(--line)}button.danger{background:#53223a;color:#ffdce9;border:1px solid #a43c68}button.small{padding:8px 10px;font-size:12px}
+header{position:sticky;top:0;z-index:5;background:#090d1beF;backdrop-filter:blur(16px);border-bottom:1px solid #263451;padding:12px 4%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:22px;font-weight:1000;letter-spacing:1.5px;color:var(--cyan);text-shadow:0 0 18px #28e7ff75}.brand span{color:white}.top-actions{display:flex;gap:8px;align-items:center}
+.wrap{width:min(1200px,94%);margin:auto}.hero{margin:24px 0;padding:28px;border:1px solid #35416b;border-radius:24px;background:linear-gradient(120deg,#211044dd,#102a43dd);box-shadow:0 18px 55px #0005;display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:center}.eyebrow{color:var(--cyan);font-weight:900;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(28px,5vw,52px);line-height:1.05;margin:10px 0}.hero p{color:#c2c9e2;line-height:1.6}.hero-art{font-size:clamp(70px,12vw,130px);text-align:center;filter:drop-shadow(0 0 24px #a75cff80)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:16px;background:#0b1225a8;border:1px solid #3a4770;border-radius:16px}.stat b{display:block;font-size:24px;color:var(--cyan)}.stat small{color:var(--muted)}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 14px;scrollbar-width:none}.tabs button{white-space:nowrap}.tabs button.active{background:linear-gradient(110deg,var(--pink),var(--purple));color:white}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:18px 0}.section-head h2{margin:0;font-size:22px}.muted{color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}.toolbar input,.toolbar select,.field{background:#11182c;color:white;border:1px solid #39466c;border-radius:12px;padding:12px;outline:none}.toolbar input{flex:1;min-width:180px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.game-card,.panel{background:linear-gradient(145deg,#151d35,#0e1427);border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:0 8px 25px #0002}.game-card{min-height:165px;display:flex;flex-direction:column;gap:8px;transition:.2s}.game-card:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 10px 30px #28e7ff20}.game-icon{font-size:34px}.game-card h3{font-size:14px;margin:0}.game-card p{font-size:11px;color:var(--muted);margin:0}.game-actions{display:flex;gap:7px;margin-top:auto}.game-actions button{flex:1}.game-actions .fav{flex:0 0 40px;padding:8px}
+.content{padding-bottom:50px}.page{display:none}.page.active{display:block}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.profile{display:flex;align-items:center;gap:16px}.avatar{width:76px;height:76px;border-radius:22px;display:grid;place-items:center;font-size:38px;background:linear-gradient(135deg,#6134a5,#087c9a);border:2px solid #7a70ff}.progress{height:10px;background:#252e4a;border-radius:20px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));width:0}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.badge-item{text-align:center;padding:14px 6px;border:1px solid var(--line);border-radius:14px;background:#10172b}.badge-item .ico{font-size:28px}.locked{opacity:.35;filter:grayscale(1)}
+.challenge{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.challenge:last-child{border:0}
+#modal{display:none;position:fixed;inset:0;background:#030510ed;z-index:20;overflow:auto;padding:18px}#modal.show{display:block}.modal-inner{max-width:650px;margin:24px auto;background:#11182c;border:1px solid #3b4b76;border-radius:22px;padding:20px;min-height:300px}.modal-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.game-stage{text-align:center;padding:22px 8px;min-height:220px}.game-stage h2{color:var(--cyan)}.game-stage .big{font-size:54px;margin:15px}.game-stage input{max-width:180px}
+.admin-note{padding:12px;background:#30233a;border:1px solid #79518b;border-radius:12px;color:#f5dfff;font-size:13px}
+footer{text-align:center;padding:25px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:850px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.hero-art{display:none}}
+@media(max-width:560px){header{padding:11px 3%}.brand{font-size:18px}.top-actions button{padding:9px;font-size:11px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.game-card{padding:12px;min-height:155px}.hero{padding:20px}.stats{gap:7px}.stat{padding:11px}.stat b{font-size:19px}.two-col{grid-template-columns:1fr}.badges{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">🎮 JR <span>GAMES</span></div>
+  <div class="top-actions">
+    <button class="secondary small" id="soundBtn" onclick="toggleSound()">🔊 Sound ON</button>
+    <button class="small" onclick="openPage('profile')">👤 Profile</button>
+  </div>
+</header>
+<main class="wrap content">
+  <section class="hero">
+    <div><div class="eyebrow">WELCOME TO YOUR ARCADE</div><h1>PLAY BEYOND<br><span style="color:var(--cyan)">LIMITS.</span></h1>
+    <p>তোমার নিজের Gaming Zone — গেম খেলো, XP অর্জন করো, Achievement আনলক করো!</p>
+    <button onclick="openPage('games')">▶ EXPLORE GAMES</button></div>
+    <div class="hero-art">👾🎮</div>
+    <div class="stats" style="grid-column:1/-1">
+      <div class="stat"><b id="statPlayed">0</b><small>Games Played</small></div>
+      <div class="stat"><b id="statXP">0</b><small>Total XP</small></div>
+      <div class="stat"><b id="statLevel">1</b><small>Player Level</small></div>
+    </div>
+  </section>
+  <nav class="tabs">
+    <button class="active" data-page="games" onclick="openPage('games')">🎮 Games</button>
+    <button data-page="profile" onclick="openPage('profile')">👤 Profile</button>
+    <button data-page="challenges" onclick="openPage('challenges')">🎯 Challenges</button>
+    <button data-page="achievements" onclick="openPage('achievements')">🏆 Achievements</button>
+    <button data-page="admin" onclick="openPage('admin')">⚙️ Admin</button>
+  </nav>
+
+  <section id="page-games" class="page active">
+    <div class="section-head"><h2>🔥 Game Library <span class="muted" style="font-size:13px">109 GAMES</span></h2><span class="muted" id="gameCount"></span></div>
+    <div class="toolbar">
+      <input id="search" placeholder="🔍 Search games..." oninput="renderGames()">
+      <select id="category" onchange="renderGames()"><option value="all">All Categories</option><option>Arcade</option><option>Puzzle</option><option>Action</option><option>Sports</option><option>Quiz</option></select>
+      <select id="sort" onchange="renderGames()"><option value="popular">Featured</option><option value="az">A–Z</option></select>
+    </div>
+    <div id="gameGrid" class="grid"></div>
+  </section>
+
+  <section id="page-profile" class="page">
+    <div class="section-head"><h2>👤 Player Profile</h2></div>
+    <div class="panel">
+      <div class="profile"><div class="avatar">😎</div><div style="flex:1"><h2 id="profileName">JR Player</h2><p class="muted">Arcade Explorer · Level <span id="profileLevel">1</span></p></div><button class="secondary small" onclick="editName()">Edit Name</button></div>
+      <p>XP Progress</p><div class="progress"><span id="xpBar"></span></div><p class="muted" id="xpText">0 / 100 XP to next level</p>
+    </div>
+    <div class="two-col" style="margin-top:14px">
+      <div class="panel"><h3>📊 Player Stats</h3><p>Games played: <b id="pPlayed">0</b></p><p>Total XP: <b id="pXP">0</b></p><p>Favourite games: <b id="pFav">0</b></p></div>
+      <div class="panel"><h3>❤️ Favourite Games</h3><div id="favList" class="muted">No favourites yet.</div></div>
+    </div>
+  </section>
+
+  <section id="page-challenges" class="page">
+    <div class="section-head"><h2>🎯 Daily Challenges</h2><span class="muted" id="todayLabel"></span></div>
+    <div class="panel" id="challengeList"></div>
+  </section>
+
+  <section id="page-achievements" class="page">
+    <div class="section-head"><h2>🏆 Achievements</h2><span class="muted" id="badgeCount"></span></div>
+    <div class="badges" id="badgeGrid"></div>
+  </section>
+
+  <section id="page-admin" class="page">
+    <div class="section-head"><h2>⚙️ Admin Panel</h2></div>
+    <div class="admin-note">ডেমো Admin Panel: এই প্যানেলটি শুধু এই ব্রাউজারে চলে। আসল নিরাপদ Admin Login ও সব ব্যবহারকারীর ডেটা পরিচালনার জন্য server/backend দরকার।</div>
+    <div class="panel" style="margin-top:14px">
+      <h3>Site Controls</h3>
+      <label>Admin PIN (default: 1234)</label><br><input class="field" id="adminPin" type="password" placeholder="Enter PIN">
+      <button onclick="adminLogin()">Unlock</button><span id="adminStatus" class="muted"></span>
+      <div id="adminControls" style="display:none;margin-top:18px">
+        <p>Total catalog games: <b>109</b></p><p>Local player XP: <b id="adminXP">0</b></p>
+        <button class="secondary" onclick="resetProgress()">Reset Player Progress</button>
+        <button class="danger" onclick="resetAll()">Reset All Local Data</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>© 2026 JR GAMES · Made with ❤️ for gamers</footer>
+
+<div id="modal">
+ <div class="modal-inner">
+  <div class="modal-top"><h2 id="modalTitle">Game</h2><button class="danger small" onclick="closeGame()">✕ Close</button></div>
+  <div id="gameStage" class="game-stage"></div>
+ </div>
+</div>
+<script>
+const gameNames=[
+"Snake Game","Tic Tac Toe","Rock Paper Scissors","Memory Match","2048 Puzzle","Number Guess","Reaction Test","Whack A Mole","Quick Quiz","Flappy Bird","Space Shooter","Car Racing","Bubble Shooter","Color Match","Math Challenge","Typing Master","Word Puzzle","Sudoku","Chess","Checkers","Ping Pong","Breakout","Pong","Dino Run","Jumping Ball","Fruit Slice","Basketball","Football","Knife Hit","Stack Tower","Helix Jump","Color Switch","Pac Man","Minesweeper","Connect Four","Hangman","Simon Says","Light Puzzle","Block Puzzle","Jigsaw Puzzle","Word Search","Crossword","Find The Difference","Maze Runner","Escape Room","Treasure Hunt","Gold Miner","Fishing Game","Penalty Shootout","Car Parking","Bike Racing","Motorcycle Stunt","Plane Shooter","Tank Battle","Zombie Attack","Ninja Run","Samurai Fight","Robot War","Alien Invasion","Space Adventure","Tower Defense","Castle Defender","Archery","Bowling","Pool Game","Golf Challenge","Darts","Baseball","Volleyball","Badminton","Ice Hockey","Skateboard","Snowboard","Ski Race","Running Race","Obstacle Course","Platform Jump","Bubble Pop","Ball Sort","Water Sort","Color Puzzle","Number Merge","Tile Match","Mahjong","Solitaire","Sudoku Master","Memory Cards","Pattern Match","Speed Clicker","Tap Challenge","Fast Fingers","Typing Race","English Quiz","Science Quiz","History Quiz","GK Quiz","Animal Quiz","Flag Quiz","Logo Quiz","Riddle Master","Brain Test","Logic Master","Shape Match","Crazy Jump","Monster Dash","Super Runner","Fire And Water"
+];
+const icons=["🐍","⭕","✊","🧠","🔢","🎯","⚡","🔨","❓","🐦","🚀","🏎️","🫧","🎨","➗","⌨️","🔤","🧩","♟️","⚫","🏓","🧱","🎾","🦖","⚽","🍉","🏀","⚽","🔪","🗼","🌀","🌈","👾","💣","🔴","📝","🎵","💡","🧱","🧩","🔎","✏️","👀","🧭","🚪","💎","⛏️","🎣","🥅","🚗","🏍️","🏁","✈️","🛡️","🧟","🥷","⚔️","🤖","👽","🌌","🏰","🏯","🏹","🎳","🎱","⛳","🎯","⚾","🏐","🏸","🏒","🛹","🏂","⛷️","🏃","🚧","🦘","🫧","🔴","💧","🎨","🔢","🀄","🃏","🔢","🃏","🧠","⚡","👆","⌨️","🇬🇧","🔬","📜","🌍","🐾","🚩","🔰","❓","🧠","🧩","🔷","👻","👹","🏃","🔥"];
+const cats=["Arcade","Puzzle","Action","Sports","Quiz"];
+const categoryFor=i=>i<20?(i%3===0?"Puzzle":"Arcade"):i<60?(i%2?"Action":"Arcade"):i<85?(i%2?"Sports":"Puzzle"):"Quiz";
+let state=loadState(),soundOn=true,audioCtx=null,challengeDate=new Date().toDateString();
+function loadState(){try{return Object.assign({name:"JR Player",xp:0,played:0,favs:[],wins:0,challenge:{date:"",played:0,score:0}},JSON.parse(localStorage.getItem("jrState")||"{}"))}catch(e){return {name:"JR Player",xp:0,played:0,favs:[],wins:0,challenge:{date:"",played:0,score:0}}}}
+function save(){localStorage.setItem("jrState",JSON.stringify(state));updateUI()}
+function beep(freq=500,duration=.08){if(!soundOn)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=freq;o.connect(g);g.connect(audioCtx.destination);g.gain.setValueAtTime(.06,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);o.start();o.stop(audioCtx.currentTime+duration)}catch(e){}}
+function toggleSound(){soundOn=!soundOn;document.getElementById("soundBtn").textContent=soundOn?"🔊 Sound ON":"🔇 Sound OFF";beep(600)}
+function openPage(p){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById("page-"+p).classList.add("active");document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));if(p==="profile"||p==="achievements"||p==="challenges")updateUI();window.scrollTo({top:0,behavior:"smooth"})}
+function renderGames(){let q=(document.getElementById("search").value||"").toLowerCase(),cat=document.getElementById("category").value,sort=document.getElementById("sort").value;let list=gameNames.map((name,i)=>({name,i})).filter(g=>g.name.toLowerCase().includes(q)&&(cat==="all"||categoryFor(g.i)===cat));if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));document.getElementById("gameCount").textContent=list.length+" shown";document.getElementById("gameGrid").innerHTML=list.map(g=>`<article class="game-card"><div class="game-icon">${icons[g.i]||"🎮"}</div><h3>${g.i+1}. ${g.name}</h3><p>${categoryFor(g.i)} · JR Arcade</p><div class="game-actions"><button onclick="playGame(${g.i})">▶ PLAY</button><button class="secondary fav" onclick="toggleFav(${g.i})">${state.favs.includes(g.i)?"❤️":"♡"}</button></div></article>`).join("")||"<p>No games found.</p>"}
+function toggleFav(i){state.favs=state.favs.includes(i)?state.favs.filter(x=>x!==i):[...state.favs,i];beep(700);save();renderGames()}
+function updateUI(){let level=Math.floor(state.xp/100)+1,rem=state.xp%100;["statPlayed","pPlayed"].forEach(id=>document.getElementById(id).textContent=state.played);["statXP","pXP","adminXP"].forEach(id=>{let el=document.getElementById(id);if(el)el.textContent=state.xp});document.getElementById("statLevel").textContent=level;document.getElementById("profileLevel").textContent=level;document.getElementById("profileName").textContent=state.name;document.getElementById("pFav").textContent=state.favs.length;document.getElementById("xpBar").style.width=rem+"%";document.getElementById("xpText").textContent=rem+" / 100 XP to next level";document.getElementById("favList").innerHTML=state.favs.length?state.favs.map(i=>gameNames[i]).join(", "):"No favourites yet.";renderBadges();renderChallenges()}
+function award(xp=10){state.xp+=xp;state.challenge.date=challengeDate;state.challenge.played=(state.challenge.played||0)+1;save();beep(850)}
+function playGame(i){document.getElementById("modal").classList.add("show");document.getElementById("modalTitle").textContent=icons[i]+" "+gameNames[i];state.played++;state.challenge.date=challengeDate;state.challenge.played=(state.challenge.played||0)+1;save();let stage=document.getElementById("gameStage");stage.innerHTML=`<p class="muted">Choose a mini-game challenge. Your XP is saved on this device.</p><button onclick="startMini('tap')">⚡ Tap Challenge</button> <button onclick="startMini('guess')">🔢 Number Guess</button> <button onclick="startMini('rps')">✊ Rock Paper Scissors</button> <button onclick="startMini('quiz')">❓ Quick Quiz</button> <button onclick="startMini('memory')">🧠 Memory Match</button>`}
+function closeGame(){document.getElementById("modal").classList.remove("show")}
+function startMini(type){let s=document.getElementById("gameStage");if(type==="tap"){let n=0,t=10;s.innerHTML=`<h2>Tap as fast as you can!</h2><div class="big" id="tapN">0</div><h3 id="tapT">10</h3><button onclick="tapPoint()">TAP!</button>`;window.tapPoint=()=>{if(t<=0)return;n++;document.getElementById("tapN").textContent=n;beep(400+n*10)};let iv=setInterval(()=>{t--;let el=document.getElementById("tapT");if(el)el.textContent=t;if(t<=0){clearInterval(iv);award(Math.max(5,n));s.innerHTML=`<h2>Time's up!</h2><p>Your taps: ${n}</p><button onclick="startMini('tap')">Play Again</button>`}},1000)}
+if(type==="guess"){let a=1+Math.floor(Math.random()*20);s.innerHTML=`<h2>Guess 1–20</h2><input class="field" id="guessVal" type="number"><button onclick="checkGuess()">Check</button><p id="guessMsg"></p>`;window.checkGuess=()=>{let v=+document.getElementById("guessVal").value;document.getElementById("guessMsg").textContent=v===a?"🎉 Correct! +15 XP":v<a?"Try a bigger number":"Try a smaller number";if(v===a)award(15);beep(v===a?850:250)}}
+if(type==="rps"){s.innerHTML=`<h2>Rock Paper Scissors</h2>${["Rock","Paper","Scissors"].map(x=>`<button onclick="rps('${x}')">${x}</button>`).join(" ")}<p id="rpsMsg"></p>`;window.rps=u=>{let c=["Rock","Paper","Scissors"][Math.floor(Math.random()*3)],w=u===c?"Draw":((u==="Rock"&&c==="Scissors")||(u==="Paper"&&c==="Rock")||(u==="Scissors"&&c==="Paper"))?"Win":"Lose";document.getElementById("rpsMsg").textContent=`You: ${u} · CPU: ${c} · ${w}`;if(w==="Win")award(10);beep(w==="Win"?850:300)}}
+if(type==="quiz"){let qs=[["বাংলাদেশের রাজধানী?","ঢাকা","চট্টগ্রাম"],["2 + 7 = ?","9","8"],["সূর্য কোন দিকে ওঠে?","পূর্ব","পশ্চিম"],["এক সপ্তাহে কয় দিন?","৭","৮"]],q=qs[Math.floor(Math.random()*qs.length)];s.innerHTML=`<h2>${q[0]}</h2><button onclick="quizPick('${q[1]}')">${q[1]}</button><button onclick="quizPick('${q[2]}')">${q[2]}</button><p id="quizMsg"></p>`;window.quizPick=v=>{let ok=v===q[1];document.getElementById("quizMsg").textContent=ok?"Correct! +10 XP":"Not quite!";if(ok)award(10);beep(ok?850:250)}}
+if(type==="memory"){let a=["🍎","🍌","🍇","🍉","🍒","🍓"],cards=[...a,...a].sort(()=>Math.random()-.5),open=[],done=[];function draw(){s.innerHTML=`<h2>Match the pairs</h2><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">${cards.map((v,i)=>`<button style="height:60px;font-size:24px" onclick="flipCard(${i})">${done.includes(i)||open.includes(i)?v:"❔"}</button>`).join("")}</div><p>${done.length/2}/6 pairs</p>`}window.flipCard=i=>{if(open.length===2||open.includes(i)||done.includes(i))return;open.push(i);if(open.length===2){draw();if(cards[open[0]]===cards[open[1]]){done.push(...open);open=[];if(done.length===12){award(20);s.innerHTML="<h2>🏆 You won! +20 XP</h2>";return}setTimeout(draw,300)}else setTimeout(()=>{open=[];draw()},700)}else draw()};draw()}}
+function renderBadges(){let items=[["🎮","First Play",state.played>=1],["🔥","10 Games",state.played>=10],["⭐","100 XP",state.xp>=100],["🏅","500 XP",state.xp>=500],["❤️","Collector",state.favs.length>=5],["🚀","Level 5",Math.floor(state.xp/100)+1>=5]];document.getElementById("badgeCount").textContent=items.filter(x=>x[2]).length+" / "+items.length+" unlocked";document.getElementById("badgeGrid").innerHTML=items.map(x=>`<div class="badge-item ${x[2]?"":"locked"}"><div class="ico">${x[0]}</div><b>${x[1]}</b><p class="muted">${x[2]?"Unlocked":"Locked"}</p></div>`).join("")}
+function renderChallenges(){let done=state.challenge.date===challengeDate?(state.challenge.played||0):0;document.getElementById("todayLabel").textContent=new Date().toLocaleDateString();let tasks=[["Play 3 games",done>=3,`${Math.min(done,3)}/3`],["Earn 30 XP today",false,"Play mini-games to earn XP"],["Add 1 favourite",state.favs.length>0,state.favs.length?"Completed":"0/1"]];document.getElementById("challengeList").innerHTML=tasks.map(t=>`<div class="challenge"><div><b>${t[0]}</b><div class="muted">${t[1]?"Completed ✓":t[2]}</div></div><span>${t[1]?"✅":"🎯"}</span></div>`).join("")}
+function editName(){let n=prompt("Enter player name:",state.name);if(n&&n.trim()){state.name=n.trim().slice(0,24);save()}}
+function adminLogin(){if(document.getElementById("adminPin").value==="1234"){document.getElementById("adminControls").style.display="block";document.getElementById("adminStatus").textContent=" ✓ Unlocked"}else document.getElementById("adminStatus").textContent=" Incorrect PIN"}
+function resetProgress(){if(confirm("Reset XP, games played and achievements?")){state.xp=0;state.played=0;state.wins=0;save();alert("Progress reset.")}}
+function resetAll(){if(confirm("Reset all JR Games local data?")){localStorage.removeItem("jrState");location.reload()}}
+renderGames();updateUI();
+</script>
+</body>
+</html>
